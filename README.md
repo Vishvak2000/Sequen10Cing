@@ -14,9 +14,12 @@ Translation converts RNA into protien, 3 nucleotides at a time : https://www.goo
 SNiP:
 Single nucleotide polymorphisms, frequently called SNPs (pronounced “snips”), are the most common type of genetic variation among people. Each SNP represents a difference in a single DNA building block, called a nucleotide. For example, a SNP may replace the nucleotide cytosine (C) with the nucleotide thymine (T) in a certain stretch of DNA.
 
+
 Deletion: a deletion removes a nucleotide, if it is not a multiple of 3, shifts the entire frame for translation so the protein product becomes completely different:deletions are responsible for diseases like cystic fibrosis.
 
 Insertion: inserts 1 or a set of nucleotides. If it is not a multiple of 3, shifts the frame for translation for the sequence after the insertion.
+
+Mutation info: https://evolution.berkeley.edu/evolibrary/article/0_0_0/mutations_03#:~:text=Deletions%20are%20mutations%20in%20which,DNA%20is%20lost%2C%20or%20deleted.&text=Since%20protein%2Dcoding%20DNA%20is,These%20changes%20are%20called%20frameshifts.
 
 //How this is meant to be used//
 Test out different sequences, mutate them, translate them, see how the protein changes.
