@@ -20,27 +20,27 @@
 
 
 
-//Sequence_Iterator::Sequence_Iterator(Sequence* x): pos(x->start) {
-//    if (x->start == nullptr) {
-//        std::cout << "empty list!" << std::endl;
-//    }
-//}
-//
-//Sequence_Iterator::Sequence_Iterator(Nucleotide* x): pos(x) {}
-//
-//Sequence_Iterator Sequence_Iterator::operator ++(){
-//    Nucleotide* p = pos->next;
-//    pos = p;
-//    return *this;
-//}
-//
-//Sequence_Iterator Sequence_Iterator::operator --(){
-//    Nucleotide* p = pos->prev;
-//    pos = p;
-//    return *this;
-//}
+/* Sequence_Iterator::Sequence_Iterator(Sequence* x): pos(x->start) {
+    if (x->start == nullptr) {
+        std::cout << "empty list!" << std::endl;
+    }
+}
 
+Sequence_Iterator::Sequence_Iterator(Nucleotide* x): pos(x) {}
 
+Sequence_Iterator Sequence_Iterator::operator ++(){
+    Nucleotide* p = pos->next;
+    pos = p;
+    return *this;
+}
+
+Sequence_Iterator Sequence_Iterator::operator --(){
+    Nucleotide* p = pos->prev;
+    pos = p;
+    return *this;
+}
+
+*/
 
 //---------------------
 
@@ -128,7 +128,7 @@ void Sequence::transcription(std::ostream& o) {
     o << std::endl;
 }
 
-bool Compare(Nucleotide* i, Nucleotide* x, int l) {
+bool Compare(Nucleotide* i, Nucleotide* x, int l, int snp) {
     int difference = 0;
     for (int index = 0; index < l ; index++) {
         if (i == nullptr || x == nullptr) {
@@ -138,7 +138,7 @@ bool Compare(Nucleotide* i, Nucleotide* x, int l) {
         if (i->base != x->base) {
             difference++;
         }
-        if (difference > 1) {
+        if (difference > snp) {
             return false;
         }
         i = i->next;
@@ -157,7 +157,7 @@ bool end_of_sequence(Nucleotide* i, int len) {
     return false;
 }
 
-std::vector<int> Sequence::find(Sequence x) {
+std::vector<int> Sequence::find(Sequence x, int snp) {
     Nucleotide* i = this->start;
     int seq_length = x.length();
     int index = 1;
@@ -167,7 +167,7 @@ std::vector<int> Sequence::find(Sequence x) {
     }
     
     do {
-        if (Compare(i, x.start, x.length())) {
+        if (Compare(i, x.start, x.length(),snp)) {
             matches.push_back(index);
         }
         i = i->next;
@@ -251,9 +251,34 @@ void Sequence::translation(std::ostream& o) {
         {"TGC","C"},{ "TGT","C"},{ "TGA","_"},{ "TGG","W"}};
         
     Sequence start_codon("ATG");
-    std::vector<int> index = this->find(start_codon);
+    Sequence stop_1("TGA");
+    Sequence stop_2("TAA");
+    Sequence stop_3("TGA");
+    
+ //   std::vector<int> index = this->find(start_codon);
+//    std::vector<int> check1 = this->find(stop_1);
+//    std::vector<int> check2 = this->find(stop_2);
+//    std::vector<int> check3 = this->find(stop_3);
+    
     std::string codon = "";
+    int start;
+    
+    if (!this->find(start_codon,0).empty()) {
+        start = this->find(start_codon,0)[0];
+    } else {
+        std::cout << "No start codon found" << std::endl;
+        return;
+    }
+    
+    if (this->find(stop_1,0).empty() || this->find(stop_2,0).empty() || this->find(stop_3,0).empty()) {
+        std::cout << "No stop codon found" << std::endl;
+    }
+
     Nucleotide* p = this->start;
+    
+    for (int i = 1; i < start ; i++ ) {
+        p = p->next;
+    }
     
     while (codon != "TGA" || codon != "TAG" || codon != "TAA") {
         codon.push_back(p->base);

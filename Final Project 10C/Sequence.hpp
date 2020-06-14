@@ -48,7 +48,7 @@ public:
     
     
     //**FIND**//
-    std::vector<int> find(Sequence x);
+    std::vector<int> find(Sequence x, int snp);
     //**MUTATION**//
     void addition(int x, char c);
     void addition(int x, Sequence s);
@@ -60,19 +60,19 @@ public:
 
 
 
-//class Sequence_Iterator {
-//private:
-//    Nucleotide* pos;
-//public:
-//    Sequence_Iterator( Sequence* x);
-//    Sequence_Iterator( Nucleotide* x);
-//    //Nucleotide* get_pos() {return pos;}
-//    Sequence_Iterator operator ++();
-//    Sequence_Iterator operator --();
-//    friend class Sequence;
-//
-//     //for destructor
-//
-//};
+/* class Sequence_Iterator {
+private:
+    Nucleotide* pos;
+public:
+    Sequence_Iterator( Sequence* x);
+    Sequence_Iterator( Nucleotide* x);
+    //Nucleotide* get_pos() {return pos;}
+    Sequence_Iterator operator ++();
+    Sequence_Iterator operator --();
+    friend class Sequence;
 
+     //for destructor
+
+};
+*/
 #endif /* Sequence_hpp */

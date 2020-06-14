@@ -14,7 +14,7 @@
 
 int main() {
     // insert code here...
-    std::string seq = "ATGCGG";
+    std::string seq = "CATGACGCCGCGAGCGCGCA";
     Sequence Monkey (seq);
 ////    Monkey.print(std::cout);
 //    std::cout << std::endl;
