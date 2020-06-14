@@ -14,7 +14,6 @@
 #include <iostream>
 
 class Nucleotide {
-
 public:
     char base;
     Nucleotide* next;
@@ -22,6 +21,8 @@ public:
     
 
     Nucleotide (char c);
+    Nucleotide (const Nucleotide &old_obj);
+    
     friend class Sequence;
 };
 
@@ -35,14 +36,24 @@ public:
     Nucleotide* end;
 
     Sequence(std::string txt);
-    ~Sequence(); //RAII?
+    void del();
+  // ~Sequence(); //RAII?
     void add(char c);
     void print(std::ostream& o);
     int length();
     
     //**CENTRAL DOGMA FUNCTIONS **//
     void transcription(std::ostream& o);
+    void translation(std::ostream& o);
     
+    
+    //**FIND**//
+    std::vector<int> find(Sequence x);
+    //**MUTATION**//
+    void addition(int x, char c);
+    void addition(int x, Sequence s);
+    
+    void deletion(int x);
 };
 
 
