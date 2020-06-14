@@ -1,6 +1,29 @@
 # Sequen10Cing
 PIC10C Final Project Documentation:
 
+
+Background Info:
+
+Central Dogma: 
+The central dogma of molecular biology describes the two-step process, transcription and translation, by which the information in genes flows into proteins: DNA → RNA → protein.
+
+Transcription converts DNA into RNA (essentially the same but single stranded, and in the scope of this project T is replaced by U)
+
+Translation converts RNA into protien, 3 nucleotides at a time : https://www.google.com/url?sa=i&url=http%3A%2F%2Fbiology.kenyon.edu%2Fcourses%2Fbiol114%2FChap05%2FChapter05.html&psig=AOvVaw0oTZy2I0BHCaxm-cxwtOZV&ust=1592247733984000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNifnpf_geoCFQAAAAAdAAAAABAD.
+
+SNiP:
+Single nucleotide polymorphisms, frequently called SNPs (pronounced “snips”), are the most common type of genetic variation among people. Each SNP represents a difference in a single DNA building block, called a nucleotide. For example, a SNP may replace the nucleotide cytosine (C) with the nucleotide thymine (T) in a certain stretch of DNA.
+
+Deletion: a deletion removes a nucleotide, if it is not a multiple of 3, shifts the entire frame for translation so the protein product becomes completely different:deletions are responsible for diseases like cystic fibrosis.
+
+Insertion: inserts 1 or a set of nucleotides. If it is not a multiple of 3, shifts the frame for translation for the sequence after the insertion.
+
+//How this is meant to be used//
+Test out different sequences, mutate them, translate them, see how the protein changes.
+Find the number of SNips b/w two sequences.
+
+
+
 //Intro//
 
 Initially my idea was as follows: 
@@ -36,7 +59,7 @@ When creating the constructor for my SEQUENCE class, I new that I would be takin
 I tried to use good coding practices and use SBRM by making the destructor of the SEQUENCE responsible for deleting all the NUCLEOTIDES, however I ran into some issues which I delve into below.
 
 The hardest function that I had to implement was the find function. SNiP or Single Nucleotide Polymorphisms are sequences in DNA that differ by only one nucleotide, likely due to a mutation. SNiP's are a useful way of tracking phylogenies and how natural selection effects them as you can look for these small differences and deduce how an organism has changed over time. I wanted to implement a find function that did exactly that, given a smaller sequence, find all the indexes in the bigger sequence that contain the smaller one up to 1 nucleotide difference. I wanted to implement it in such a manner that the smaller sequence is tested against each nucleotide of the bigger sequence so that all possible comparisons are done. This is quite memory intensive however, I was not able to find a different way to implement it.
-When actually coding the function, I realized how useful sequence containers were in doing comparisons as it is very easy to loop through then and align them through indexing. Adaptive containers, like my list, are not very good for comparisons and find functions, at least in my implementation as I also wanted to keep a count of the indexes where all the matches were. Essentially I was trying to implement sequence container functionality in an adaptive container. When coding the function, I realized I had to keep track of many things: the index, the pointer to the original sequence, pointer to the sequence being found, etc. I also ran into some memory management issues, for example, I not only had to ensure that none of my pointers reached a nullptr (end of the sequence) but also if the (next)^n pointer was not null, where n was the size of the sequence being compare. I was finally able to implement the function with the use of helper functions.
+When actually coding the function, I realized how useful sequence containers were in doing comparisons as it is very easy to loop through then and align them through indexing. Adaptive containers, like my list, are not very good for comparisons and find functions, at least in my implementation as I also wanted to keep a count of the indexes where all the matches were. Essentially I was trying to implement sequence container functionality in an adaptive container. When coding the function, I realized I had to keep track of many things: the index, the pointer to the original sequence, pointer to the sequence being found, etc. I also ran into some memory management issues, for example, I not only had to ensure that none of my pointers reached a nullptr (end of the sequence) but also if the (next)^n pointer was not null, where n is the size of the sequence being compare. I was finally able to implement the function with the use of helper functions.
 
 
 
